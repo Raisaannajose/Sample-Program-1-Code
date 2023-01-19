@@ -16,9 +16,9 @@ class DataSet{                          //to store the distance and time inputs 
             cout<<arr[i][0]<<":"<<arr[i][1]<<":"<<arr[i][2]<<endl;       //the stored values are displayed
             
         }
-    }  
+    } 
 };
-class UserInput: public DataSet{
+class UserInput{
     public:
     int k=0;
     float distance,time1;
@@ -39,18 +39,16 @@ class UserInput: public DataSet{
         }
     }
 };
-class Measure: public UserInput
+class Measure
 {
-    float speed;
     public:
     void MeasureSpeed(){                                      //MeasureSpeed to measure the speed of all user inputs and update it into Attribute1
         for(int i=0;i<10;i++){
          Attribute1[i][2]= Attribute1[i][0]/Attribute1[i][1];
         }
-        Data(Attribute1);                                     //to store the values in DataSet class
      }
 };
-class ShowResults: public Measure
+class ShowResults
 {
     public:
     void WriteToFile()                                     //WriteToFile() to print distance,time and calculated speed from Attribute1 to a csv file
@@ -73,10 +71,15 @@ class ShowResults: public Measure
     }
 
 };
+
 int main(){
-    ShowResults obj;
+    UserInput obj;
     obj.Method1();
-    obj.MeasureSpeed();
-    obj.WriteToFile();
+    Measure obj1;
+    obj1.MeasureSpeed();
+    DataSet obj2;
+    obj2.Data(Attribute1);                 //to store the values in DataSet class
+    ShowResults obj3;
+    obj3.WriteToFile();
     return 0;
 }
